@@ -8,10 +8,6 @@ const webRoute = require("./routes/web");
 
 app.use("/", webRoute);
 
-connection.query("SELECT * FROM Users u", function (err, results) {
-  console.log(results);
-});
-
 app.listen(port, () => {
   console.log(`Example app listening on port ${port}`);
 });
