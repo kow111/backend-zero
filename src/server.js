@@ -4,14 +4,12 @@ const connection = require("./config/database");
 const express = require("express");
 const app = express();
 const port = process.env.PORT || 8888;
-const webRoute = require("./routes/web");
 const apiRoute = require("./routes/api");
-const Kitten = require("./models/kitten");
+
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
 
 app.use("/", apiRoute);
-
-const silence = new Kitten({ name: "Provjp" });
-silence.save();
 
 (async () => {
   try {
