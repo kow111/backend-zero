@@ -23,8 +23,9 @@ const connection = async () => {
   const options = {
     user: "root",
     pass: "123456",
+    dbName: "hoidanit",
   };
-  await mongoose.connect("mongodb://127.0.0.1:27017", options);
+  await mongoose.connect("mongodb://127.0.0.1:27017/", options);
   const state = Number(mongoose.connection.readyState);
   console.log(dbState.find((f) => f.value == state).label, "to db"); // connected to db
 };
