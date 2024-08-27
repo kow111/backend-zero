@@ -20,13 +20,13 @@ const dbState = [
 ];
 
 const connection = async () => {
-  try {
-    await mongoose.connect("mongodb://root:123456@127.0.0.1:27017");
-    const state = Number(mongoose.connection.readyState);
-    console.log(dbState.find((f) => f.value == state).label, "to db"); // connected to db
-  } catch (error) {
-    console.log(error);
-  }
+  const options = {
+    user: "root",
+    pass: "123456",
+  };
+  await mongoose.connect("mongodb://127.0.0.1:27017", options);
+  const state = Number(mongoose.connection.readyState);
+  console.log(dbState.find((f) => f.value == state).label, "to db"); // connected to db
 };
 
 module.exports = connection;
