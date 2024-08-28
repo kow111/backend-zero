@@ -1,9 +1,11 @@
-const connection = require("../config/database");
 const User = require("../models/user");
 
-const getHomePage = async (req, res) => {
+const getAllUsers = async (req, res) => {
   let users = await User.find();
-  res.send(users);
+  return res.status(200).json({
+    EC: 0,
+    DT: users,
+  });
 };
 
 const postCreateUser = async (req, res) => {
@@ -11,25 +13,35 @@ const postCreateUser = async (req, res) => {
   let name = req.body.name;
   let city = req.body.city;
   console.log(email, name, city);
-  await User.create({
+  let result = await User.create({
     email,
     name,
     city,
   });
-  res.send("create user completed");
+
+  return res.status(200).json({
+    EC: 0,
+    DT: result,
+  });
 };
 
 const putUpdateUser = async (req, res) => {
   const id = req.params.id;
   const { email, name, city } = req.body;
   const updatedUser = await User.findByIdAndUpdate(id, { name, email, city });
-  res.send(updatedUser);
+  return res.status(200).json({
+    EC: 0,
+    DT: updatedUser,
+  });
 };
 
 const deleteUser = async (req, res) => {
   const id = req.params.id;
-  await User.findByIdAndDelete(id);
-  res.send("delete success");
+  let result = await User.findByIdAndDelete(id);
+  return res.status(200).json({
+    EC: 0,
+    DT: result,
+  });
 };
 
 const getABC = (req, res) => {
@@ -37,7 +49,7 @@ const getABC = (req, res) => {
 };
 
 module.exports = {
-  getHomePage,
+  getAllUsers,
   getABC,
   postCreateUser,
   putUpdateUser,
