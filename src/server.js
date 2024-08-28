@@ -4,14 +4,16 @@ const connection = require("./config/database");
 const express = require("express");
 const app = express();
 const port = process.env.PORT || 8888;
-const apiRoute = require("./routes/api");
+const userRoute = require("./routes/api");
+const fileRoute = require("./routes/file");
 const fileUpload = require("express-fileupload");
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(fileUpload());
 
-app.use("/api/v1/user", apiRoute);
+app.use("/api/v1/user", userRoute);
+app.use("/api/v1/file", fileRoute);
 
 (async () => {
   try {
