@@ -1,10 +1,11 @@
 const uploadSingle = async (fileObject) => {
-  let uploadPath = "src/uploads/" + Date.now() + fileObject.name;
+  let saveName = Date.now() + fileObject.name;
+  let uploadPath = "src/uploads/" + saveName;
   try {
     await fileObject.mv(uploadPath);
     return {
       status: "success",
-      link: "link",
+      link: saveName,
       error: null,
     };
   } catch (e) {
