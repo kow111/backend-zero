@@ -2,6 +2,8 @@ const { uploadSingle } = require("../services/fileService");
 const {
   createCustomerService,
   createArrayCustomerService,
+  getAllCustomerService,
+  deleteCustomerService,
 } = require("../services/customer.service");
 
 const postCreateCustomer = async (req, res) => {
@@ -55,7 +57,44 @@ const postCreateArrayCustomer = async (req, res) => {
   }
 };
 
+const getAllCustomer = async (req, res) => {
+  try {
+    let rs = await getAllCustomerService();
+    return res.status(200).json({
+      EC: 0,
+      DT: rs,
+      EM: "Success",
+    });
+  } catch (e) {
+    return res.status(400).json({
+      EC: -1,
+      DT: null,
+      EM: e.message,
+    });
+  }
+};
+
+const deleteCustomer = async (req, res) => {
+  try {
+    let id = req.params.id;
+    let rs = await deleteCustomerService(id);
+    return res.status(200).json({
+      EC: 0,
+      DT: rs,
+      EM: "Success",
+    });
+  } catch (e) {
+    return res.status(400).json({
+      EC: -1,
+      DT: null,
+      EM: e.message,
+    });
+  }
+};
+
 module.exports = {
   postCreateCustomer,
   postCreateArrayCustomer,
+  getAllCustomer,
+  deleteCustomer,
 };
