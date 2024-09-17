@@ -8,6 +8,7 @@ const userRoute = require("./routes/api");
 const fileRoute = require("./routes/file");
 const customerRoute = require("./routes/customer.route");
 const fileUpload = require("express-fileupload");
+const infoRoute = require("./routes/info.router");
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
@@ -16,6 +17,7 @@ app.use(fileUpload());
 app.use("/api/v1/user", userRoute);
 app.use("/api/v1/file", fileRoute);
 app.use("/api/v1/customer", customerRoute);
+app.use("/api/v1/info", infoRoute);
 
 (async () => {
   try {
